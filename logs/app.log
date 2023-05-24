@@ -1,2 +1,14 @@
-[2022-04-07T17:45:23.302218+00:00] slim-app.INFO: Users list was viewed. [] {"uid":"0f4d164"}
-[2022-04-07T17:45:23.304183+00:00] slim-app.INFO: User of id `1` was viewed. [] {"uid":"ca9ddf5"}
+[2022-03-28T07:34:25.519048+00:00] ck-service-front.INFO: 0 [] {"uid":"121f1fb"}
+[2022-03-28T07:35:15.461480+00:00] ck-service-front.INFO: 0 [] {"uid":"099401f"}
+[2022-03-28T07:36:50.879312+00:00] ck-service-front.INFO: 0 [] {"uid":"c319526"}
+[2022-03-28T07:36:52.356667+00:00] ck-service-front.INFO: 0 [] {"uid":"66e16b1"}
+[2022-03-28T07:37:10.464871+00:00] ck-service-front.INFO: 0 [] {"uid":"8ceb13b"}
+[2022-03-28T07:37:11.861714+00:00] ck-service-front.INFO: 0 [] {"uid":"5a5eba5"}
+[2022-03-28T07:37:43.242144+00:00] ck-service-front.INFO: Array [] {"uid":"3cc638d"}
+[2022-03-28T07:37:44.871380+00:00] ck-service-front.INFO: Array [] {"uid":"1d388b3"}
+[2022-03-28T07:38:04.511991+00:00] ck-service-front.INFO: Array [] {"uid":"f056c06"}
+[2022-03-28T07:39:40.055909+00:00] ck-service-front.INFO: Service(1, Test, Test, https://www.thewowstyle.com/wp-content/uploads/2015/04/tuned_concept_pink_car-normal.jpg) [] {"uid":"ad7f5eb"}
+[2022-03-28T07:40:01.950332+00:00] ck-service-front.INFO: Service(1, Test, Test, https://www.thewowstyle.com/wp-content/uploads/2015/04/tuned_concept_pink_car-normal.jpg) [] {"uid":"fc0b6e4"}
+[2022-03-28T07:40:01.950843+00:00] ck-service-front.INFO: 1 [] {"uid":"fc0b6e4"}
+[2022-03-28T07:47:06.870676+00:00] ck-service-front.INFO: Service(1, Test, Test, https://www.thewowstyle.com/wp-content/uploads/2015/04/tuned_concept_pink_car-normal.jpg) [] {"uid":"f923d2a"}
+[2022-03-28T07:47:06.871462+00:00] ck-service-front.INFO: 1 [] {"uid":"f923d2a"}

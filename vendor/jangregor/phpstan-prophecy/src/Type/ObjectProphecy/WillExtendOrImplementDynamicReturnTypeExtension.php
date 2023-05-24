@@ -55,19 +55,18 @@ final class WillExtendOrImplementDynamicReturnTypeExtension implements Type\Dyna
 
         $returnType = $parametersAcceptor->getReturnType();
 
-        if (!$calledOnType instanceof Type\Generic\GenericObjectType) {
+        if (
+            !$calledOnType instanceof Type\Generic\GenericObjectType
+            || Prophecy\ObjectProphecy::class !== $calledOnType->getClassName()
+        ) {
             return $returnType;
         }
 
-        if (Prophecy\ObjectProphecy::class !== $calledOnType->getClassName()) {
+        if (0 === \count($methodCall->args)) {
             return $returnType;
         }
 
-        if (0 === \count($methodCall->getArgs())) {
-            return $returnType;
-        }
-
-        $argumentType = $scope->getType($methodCall->getArgs()[0]->value);
+        $argumentType = $scope->getType($methodCall->args[0]->value);
 
         if (!$argumentType instanceof Type\Constant\ConstantStringType) {
             return $returnType;

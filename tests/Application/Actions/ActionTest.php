@@ -17,44 +17,62 @@ class ActionTest extends TestCase
         $app = $this->getAppInstance();
         $container = $app->getContainer();
         $logger = $container->get(LoggerInterface::class);
-        $testAction = new class($logger) extends Action
-        {
-            public function __construct(LoggerInterface $loggerInterface)
-            {
+
+        $testAction = new class($logger) extends Action {
+            public function __construct(
+                LoggerInterface $loggerInterface
+            ) {
                 parent::__construct($loggerInterface);
             }
-            
+
             public function action(): Response
             {
-                return $this->respond(new ActionPayload(202, ['willBeDoneAt' => (new DateTimeImmutable())->format(DateTimeImmutable::ATOM)]));
+                return $this->respond(
+                    new ActionPayload(
+                        202,
+                        [
+                            'willBeDoneAt' => (new DateTimeImmutable())->format(DateTimeImmutable::ATOM)
+                        ]
+                    )
+                );
             }
         };
+
         $app->get('/test-action-response-code', $testAction);
         $request = $this->createRequest('GET', '/test-action-response-code');
         $response = $app->handle($request);
+
         $this->assertEquals(202, $response->getStatusCode());
     }
-    
+
     public function testActionSetsHttpCodeRespondData()
     {
         $app = $this->getAppInstance();
         $container = $app->getContainer();
         $logger = $container->get(LoggerInterface::class);
-        $testAction = new class($logger) extends Action
-        {
-            public function __construct(LoggerInterface $loggerInterface)
-            {
+
+        $testAction = new class($logger) extends Action {
+            public function __construct(
+                LoggerInterface $loggerInterface
+            ) {
                 parent::__construct($loggerInterface);
             }
-            
+
             public function action(): Response
             {
-                return $this->respondWithData(['willBeDoneAt' => (new DateTimeImmutable())->format(DateTimeImmutable::ATOM)], 202);
+                return $this->respondWithData(
+                    [
+                        'willBeDoneAt' => (new DateTimeImmutable())->format(DateTimeImmutable::ATOM)
+                    ],
+                    202
+                );
             }
         };
+
         $app->get('/test-action-response-code', $testAction);
         $request = $this->createRequest('GET', '/test-action-response-code');
         $response = $app->handle($request);
+
         $this->assertEquals(202, $response->getStatusCode());
     }
 }

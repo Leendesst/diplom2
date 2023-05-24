@@ -5,6 +5,7 @@ namespace App\Application\Handlers;
 
 use App\Application\Actions\ActionError;
 use App\Application\Actions\ActionPayload;
+use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpException;
@@ -25,10 +26,15 @@ class HttpErrorHandler extends SlimErrorHandler
     {
         $exception = $this->exception;
         $statusCode = 500;
-        $error = new ActionError(ActionError::SERVER_ERROR, 'An internal error has occurred while processing your request.');
+        $error = new ActionError(
+            ActionError::SERVER_ERROR,
+            'An internal error has occurred while processing your request.'
+        );
+
         if ($exception instanceof HttpException) {
             $statusCode = $exception->getCode();
             $error->setDescription($exception->getMessage());
+
             if ($exception instanceof HttpNotFoundException) {
                 $error->setType(ActionError::RESOURCE_NOT_FOUND);
             } elseif ($exception instanceof HttpMethodNotAllowedException) {
@@ -43,13 +49,21 @@ class HttpErrorHandler extends SlimErrorHandler
                 $error->setType(ActionError::NOT_IMPLEMENTED);
             }
         }
-        if (!($exception instanceof HttpException) && $exception instanceof Throwable && $this->displayErrorDetails) {
+
+        if (
+            !($exception instanceof HttpException)
+            && $exception instanceof Throwable
+            && $this->displayErrorDetails
+        ) {
             $error->setDescription($exception->getMessage());
         }
+
         $payload = new ActionPayload($statusCode, null, $error);
         $encodedPayload = json_encode($payload, JSON_PRETTY_PRINT);
+
         $response = $this->responseFactory->createResponse($statusCode);
         $response->getBody()->write($encodedPayload);
+
         return $response->withHeader('Content-Type', 'application/json');
     }
 }

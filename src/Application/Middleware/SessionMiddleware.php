@@ -5,10 +5,10 @@ namespace App\Application\Middleware;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\MiddlewareInterface as Middleware;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
-class SessionMiddleware implements Middleware
+class SessionMiddleware implements MiddlewareInterface
 {
     /**
      * {@inheritdoc}
@@ -19,6 +19,7 @@ class SessionMiddleware implements Middleware
             session_start();
             $request = $request->withAttribute('session', $_SESSION);
         }
+
         return $handler->handle($request);
     }
 }
